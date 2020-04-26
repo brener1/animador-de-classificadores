@@ -55,6 +55,15 @@ public class Gravador
         seqGravacoes.add(gravacao);
     }
 
+    public void gravarComparacaoBinaria(List<Integer> lista, int i, int j, int k) {
+        List<Color> cores = novaListaColors(lista.size(), Color.BLUE);
+        cores.set(i, Color.GRAY);
+        cores.set(j, Color.GRAY);
+        cores.set(k, Color.RED);
+        ListaGravada gravacao = new ListaGravada(List.copyOf(lista), cores, "Pesquisa binária");
+        seqGravacoes.add(gravacao);
+    }
+
     /** Método que destaca os dois indices que tiveram seus valores trocados(com uma cor diferente do método anterior)
      * e grava a disposição atual da lista
      *

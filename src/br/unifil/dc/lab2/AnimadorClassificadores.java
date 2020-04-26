@@ -107,6 +107,15 @@ public class AnimadorClassificadores extends JFrame {
                 novoFilme = AlgoritmosAnimados.classificarPorSelecao(valores);
                 break;
 
+            case PESQUISADOR_BINARIO:
+                Integer chave2 = Integer.parseInt(txfEntradaChavePesquisa.getText());
+                //novoFilme = AlgoritmosAnimados.pesquisaBinaria(valores, chave2);
+                break;
+
+            case CLASSIFICADOR_INSERCAO:
+                novoFilme = AlgoritmosAnimados.classificarInsercao(valores);
+                break;
+
             default:
                 throw new RuntimeException("Funcionalidade ainda não implementada pelo aluno");
         }

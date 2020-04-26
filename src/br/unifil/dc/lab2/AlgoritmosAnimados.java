@@ -88,7 +88,63 @@ public class AlgoritmosAnimados
         return anim;
     }
 
-        private static void permutar(List<Integer> lista, int a, int b) {
+    //terminar
+    public static Gravador pesquisaBinaria(List<Integer> valores, Integer chave) {
+        Gravador anim = new Gravador();
+        anim.gravarLista(valores, "Disposição inicial");
+        assert isOrdenada(valores) : "Esse método só funciona com listas ordenadas.";
+
+        int acumulaMeio = 0;
+        do {
+            int meio = valores.size() / 2;
+
+            anim.gravarComparacaoBinaria(valores, 0, valores.size()-1, meio);
+            if (valores.get(meio) == chave) {
+                anim.gravarIndiceDestacado(valores, meio + acumulaMeio, "Chave encontrada");
+                return anim;
+            }
+
+            if (valores.get(meio) > chave) {
+                valores = valores.subList(0, meio);
+            }
+            anim.gravarComparacaoSimples(valores, 0, valores.size());
+            if (valores.get(meio) < chave) {
+                acumulaMeio += meio + 1;
+                valores = valores.subList(meio + 1, valores.size());
+            }
+            anim.gravarComparacaoSimples(valores, 0, valores.size());
+        } while(valores.size() > 0);
+
+        anim.gravarLista(valores, "Disposição Final");
+        return anim;
+
+    }
+    
+    public static Gravador classificarInsercao(List<Integer> lista) {
+        Gravador anim = new Gravador();
+        anim.gravarLista(lista, "Disposição inicial");
+
+        for (int i = 1; i < lista.size(); i++) {
+            Integer elem = lista.get(i);
+
+            int j = i;
+            anim.gravarComparacaoSimples(lista, j, j-1);
+            while (j > 0 && lista.get(j-1) > elem) {
+                anim.gravarPosTrocas(lista, j, j-1);
+                lista.set(j, lista.get(j-1)); // Deslocamento
+
+                j--;
+                anim.gravarComparacaoSimples(lista, j, i);
+            }
+
+            lista.set(j, elem);
+        }
+        anim.gravarLista(lista, "Disposição final");
+        return anim;
+    }
+
+
+    private static void permutar(List<Integer> lista, int a, int b) {
         Integer permutador = lista.get(a); // permutador = lista[a]
         lista.set(a, lista.get(b)); // lista[a] = lista[b]
         lista.set(b, permutador); // lista[b] = permutador
@@ -101,6 +157,14 @@ public class AlgoritmosAnimados
                 menor = i;
         }
         return menor;
+    }
+
+    private static boolean isOrdenada(List<Integer> lista) {
+        for (int i = 1; i < lista.size(); i++)
+            if (lista.get(i-1) > lista.get(i))
+                return false;
+
+        return true;
     }
 
 }
