@@ -116,6 +116,10 @@ public class AnimadorClassificadores extends JFrame {
                 novoFilme = AlgoritmosAnimados.classificarInsercao(valores);
                 break;
 
+            case CLASSIFICADOR_QUICKSORT:
+                novoFilme = AlgoritmosAnimados.classificarQuickSort(valores, 0, valores.size()-1);
+                break;
+
             default:
                 throw new RuntimeException("Funcionalidade ainda não implementada pelo aluno");
         }

@@ -147,6 +147,21 @@ public class AlgoritmosAnimados
         return anim;
     }
 
+    //o método QuickSort esta apenas fazendo a ordenação, ele não marca as comparações nem trocas
+    public static Gravador classificarQuickSort(List<Integer> lista, int esq, int dir){
+        Gravador anim = new Gravador();
+        anim.gravarLista(lista, "Disposição inicial");
+
+        if(esq<dir){
+            int j = separar(lista, esq, dir, anim);
+            classificarQuickSort(lista, esq, j-1);
+            classificarQuickSort(lista, j+1, dir);
+        }
+
+        anim.gravarLista(lista, "Disposição final");
+        return anim;
+    }
+
 
     private static void permutar(List<Integer> lista, int a, int b) {
         Integer permutador = lista.get(a); // permutador = lista[a]
@@ -176,6 +191,24 @@ public class AlgoritmosAnimados
                 return false;
 
         return true;
+    }
+
+    private static int separar(List<Integer>  valores, int esq, int dir, Gravador anim){
+        int i = esq+1;
+        int j = dir;
+        int pivo = valores.get(esq);
+        while (i <= j){
+            if (valores.get(i) <= pivo) i++;
+            else if (valores.get(j) > pivo) j--;
+            else if (i <= j){
+                permutar(valores, i, j);
+                i++;
+                j--;
+            }
+        }
+
+        permutar(valores, esq, j);
+        return j;
     }
 
 }
