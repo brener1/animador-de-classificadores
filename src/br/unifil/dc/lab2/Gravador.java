@@ -60,7 +60,7 @@ public class Gravador
         cores.set(i, Color.GRAY);
         cores.set(j, Color.GRAY);
         cores.set(k, Color.RED);
-        ListaGravada gravacao = new ListaGravada(List.copyOf(lista), cores, "Pesquisa binária");
+        ListaGravada gravacao = new ListaGravada(lista, cores, "Pesquisa binária");
         seqGravacoes.add(gravacao);
     }
 

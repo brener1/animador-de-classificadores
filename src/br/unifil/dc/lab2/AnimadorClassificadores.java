@@ -109,7 +109,7 @@ public class AnimadorClassificadores extends JFrame {
 
             case PESQUISADOR_BINARIO:
                 Integer chave2 = Integer.parseInt(txfEntradaChavePesquisa.getText());
-                //novoFilme = AlgoritmosAnimados.pesquisaBinaria(valores, chave2);
+                novoFilme = AlgoritmosAnimados.pesquisaBinaria(valores, chave2);
                 break;
 
             case CLASSIFICADOR_INSERCAO:

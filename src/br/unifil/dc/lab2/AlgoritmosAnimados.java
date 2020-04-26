@@ -63,8 +63,8 @@ public class AlgoritmosAnimados
                 anim.gravarComparacaoSimples(valores, i-1, i);
                 if (valores.get(i-1) > valores.get(i)) {
                     permutar(valores, i - 1, i);
-                    anim.gravarPosTrocas(valores, i-1, i);
                     houvePermuta = true;
+                    anim.gravarPosTrocas(valores, i-1, i);
                 }
             }
         } while (houvePermuta);
@@ -88,38 +88,42 @@ public class AlgoritmosAnimados
         return anim;
     }
 
-    //terminar
+    //Este método ordena a lista caso ela não esteja ordenada antes de fazer a pesquisa binária
     public static Gravador pesquisaBinaria(List<Integer> valores, Integer chave) {
         Gravador anim = new Gravador();
+        if(!isOrdenada(valores)) {
+            ordenar(valores);
+        }
         anim.gravarLista(valores, "Disposição inicial");
-        assert isOrdenada(valores) : "Esse método só funciona com listas ordenadas.";
+        List<Integer> dados = valores;
 
         int acumulaMeio = 0;
+        int inicio = 0;
+        int fim = valores.size()-1;
         do {
             int meio = valores.size() / 2;
 
-            anim.gravarComparacaoBinaria(valores, 0, valores.size()-1, meio);
+            anim.gravarComparacaoBinaria(dados, inicio, fim, meio+acumulaMeio);
             if (valores.get(meio) == chave) {
-                anim.gravarIndiceDestacado(valores, meio + acumulaMeio, "Chave encontrada");
+                anim.gravarIndiceDestacado(dados, meio + acumulaMeio, "Chave encontrada");
                 return anim;
             }
-
-            if (valores.get(meio) > chave) {
+            else if (valores.get(meio) > chave) {
                 valores = valores.subList(0, meio);
+                fim = meio;
             }
-            anim.gravarComparacaoSimples(valores, 0, valores.size());
-            if (valores.get(meio) < chave) {
+            else if (valores.get(meio) < chave) {
                 acumulaMeio += meio + 1;
                 valores = valores.subList(meio + 1, valores.size());
+                inicio = acumulaMeio;
             }
-            anim.gravarComparacaoSimples(valores, 0, valores.size());
         } while(valores.size() > 0);
 
-        anim.gravarLista(valores, "Disposição Final");
+        anim.gravarLista(dados, "Chave não encontrada");
         return anim;
 
     }
-    
+
     public static Gravador classificarInsercao(List<Integer> lista) {
         Gravador anim = new Gravador();
         anim.gravarLista(lista, "Disposição inicial");
@@ -157,6 +161,13 @@ public class AlgoritmosAnimados
                 menor = i;
         }
         return menor;
+    }
+
+    private static void ordenar(List<Integer> lista){
+        for (int i = 0; i < lista.size(); i++) {
+            int menorIdx = encontrarIndiceMenorElem(lista, i);
+            permutar(lista, menorIdx, i);
+        }
     }
 
     private static boolean isOrdenada(List<Integer> lista) {
