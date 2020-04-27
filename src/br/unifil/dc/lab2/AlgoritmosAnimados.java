@@ -95,31 +95,27 @@ public class AlgoritmosAnimados
             ordenar(valores);
         }
         anim.gravarLista(valores, "Disposição inicial");
-        List<Integer> dados = valores;
+        List<Integer> lista = valores;
 
         int acumulaMeio = 0;
-        int inicio = 0;
-        int fim = valores.size()-1;
         do {
             int meio = valores.size() / 2;
-
-            anim.gravarComparacaoBinaria(dados, inicio, fim, meio+acumulaMeio);
+            System.out.println(meio);
+            anim.gravarComparacaoBinaria(valores, 0, valores.size()-1, meio);
             if (valores.get(meio) == chave) {
-                anim.gravarIndiceDestacado(dados, meio + acumulaMeio, "Chave encontrada");
+                anim.gravarIndiceDestacado(lista, meio + acumulaMeio, "Chave encontrada");
                 return anim;
             }
             else if (valores.get(meio) > chave) {
                 valores = valores.subList(0, meio);
-                fim = meio;
             }
             else if (valores.get(meio) < chave) {
                 acumulaMeio += meio + 1;
                 valores = valores.subList(meio + 1, valores.size());
-                inicio = acumulaMeio;
             }
         } while(valores.size() > 0);
 
-        anim.gravarLista(dados, "Chave não encontrada");
+        anim.gravarLista(valores, "Chave não encontrada");
         return anim;
 
     }
