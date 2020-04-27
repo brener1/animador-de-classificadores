@@ -93,7 +93,7 @@ public class ListaGravada implements Transparencia
             //desenha nome
             String nome = lista.get(i).toString();
             int posiNome = margem+(int)largura/2;
-            pincel.drawString(nome, posiRect+((int)largura/3),base+30);
+            pincel.drawString(nome, posiRect+((int)largura/3)+1,base+30);
 
             //define a posição do proximo retangulo e proximo nome
             posiNome += distancia+largura;

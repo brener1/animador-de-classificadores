@@ -100,7 +100,6 @@ public class AlgoritmosAnimados
         int acumulaMeio = 0;
         do {
             int meio = valores.size() / 2;
-            System.out.println(meio);
             anim.gravarComparacaoBinaria(valores, 0, valores.size()-1, meio);
             if (valores.get(meio) == chave) {
                 anim.gravarIndiceDestacado(lista, meio + acumulaMeio, "Chave encontrada");
